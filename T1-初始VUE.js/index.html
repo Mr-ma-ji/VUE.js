@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vueT1</title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+    *{
+    margin: 0;
+    padding: 0;
+      }
+    </style>
+</head>
+<body>
+    <div id="app">
+       {{message}}
+       <br/>
+       <!--双向绑定-->
+     姓:<input type="text" v-model="name">
+     <br/>
+     名：<input type="text" v-model="ming">
+     <br/>
+    <label>欢迎您！
+            <span>{{name}}</span> 
+            <span>{{ming}}</span> 
+    </label>
+    </div>
+   <script>
+       //model
+       var mydata={
+           message:"hello world",
+           name:"",
+           ming:""
+       }
+       //viewmodel
+       var vm=new Vue({
+           el:"#app",
+           data:mydata
+       });
+   </script>
+</body>
+</html>
