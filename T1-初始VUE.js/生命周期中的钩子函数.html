@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+    </div>
+    <script>
+        var vm=new new Vue({
+            el:"#app",
+            data:{
+                title:"hello world"
+            },
+            created:function (){
+                this.title="生命周期钩子函数";
+                console.log("created()钩子函数执行");
+            },
+            mounted:function () {
+                console.log(this.$el);
+                console.log("模型title的值",this.title);
+                console.log("mounted()钩子函数执行");
+            }
+        })
+    </script>
+</body>
+</html>

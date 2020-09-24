@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div >   
+      <h1 id="app">{{showtext}}</h1>
+    </div>
+    <script>
+        var vm=new Vue({
+           el:"#app", 
+           data:{
+            title:[],
+            index:0,
+            showtext:""
+           },
+           created:function () {
+               this.title=[
+                   "今日超市特惠：",
+                   "黄瓜一毛钱一斤",
+                   "豆角二毛钱一斤",
+                   "香蕉三毛钱一斤",
+                   "苹果四毛钱一斤",
+                   ];
+                this.showtext=this.title[this.index];
+           },
+           mounted:function () {
+               //获取值
+               var _this=this;
+               //定义动画
+              var timers= setInterval(function(){
+                   if(_this.index<_this.title.length-1){
+                    _this.index++;
+                   }else{
+                    _this.index=0;
+                   }
+                   //从新赋值
+                   _this.showtext=_this.title[_this.index];
+
+               },2000);
+               
+           }
+        });
+    </script>
+</body>
+</html>
