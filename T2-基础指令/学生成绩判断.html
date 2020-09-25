@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        学生姓名：<input type="text" v-model="sname"><br/>
+        学生成绩：<input type="text" v-model="schenji"><br/>
+        <div v-if="parseInt(schenji)>80">
+            {{sname}}晋级了，旅游去了
+        </div>
+        <div v-else>
+            {{sname}}失败了，学习去了
+        </div>
+    </div>
+    <script>
+        var vm =new Vue({
+            el:"#app",
+            data:{
+                sname:"", 
+                schenji:null
+            }
+        })
+    </script>
+</body>
+</html>

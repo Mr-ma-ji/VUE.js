@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+       基本工资：<input type="text" v-model="jmoney"><br/>
+       岗位工资：<input type="text" v-model="gmoney"><br/>
+       月度奖金：<input type="text" v-model="ymoney"><br/>
+       综合补贴：<input type="text" v-model="zmoney"><br/>
+       扣款金额：<input type="text" v-model="kmoney"><br/>
+       应发工资：￥{{parseInt(jmoney)+parseInt(gmoney)+parseInt(ymoney)+parseInt(zmoney)-parseInt(kmoney)}}元
+    </div>
+    <script>
+        var vm =new Vue({
+            el:"#app",
+            data:{
+                jmoney:0.00, 
+                gmoney:0.00, 
+                ymoney:0.00, 
+                zmoney:0.00, 
+                kmoney:0.00, 
+                summoney:0.00
+            },
+            mounted:function () {
+              
+            }
+        })
+    </script>
+</body>
+</html>
