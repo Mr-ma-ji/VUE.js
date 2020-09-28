@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+ <div id="app">
+    <p>
+        第一个数:<input type="text" v-model="num1"><br/>
+        第二个数:<input type="text" v-model="num2"><br/>
+    </p>
+    <p>
+        <button v-on:click="jia">加法</button>
+        <button v-on:click="jian">减法</button>
+        <button v-on:click="Cheng">乘法</button>
+        <button v-on:click="Chu">除法</button><br/>
+    </p>
+    结果:<input type="text" v-model="res"><br/>
+ </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                num1:0,
+                num2:0,
+                res:0
+            },
+            methods: {
+                //加法
+                jia:function(){
+                    this.res=parseInt( this.num1)+parseInt( this.num2);
+                },
+                  //减法
+                jian:function(){
+                    this.res=parseInt( this.num1)-parseInt( this.num2);
+
+                },
+                  //乘法
+                Cheng:function(){
+                    this.res=parseInt( this.num1)*parseInt( this.num2);
+
+                },
+                  //除法
+               Chu:function(){
+                this.res=parseInt( this.num1)/parseInt( this.num2);
+
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

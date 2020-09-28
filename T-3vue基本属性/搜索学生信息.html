@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        姓名：<input type="text" v-model="get">
+        <table>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+            </tr>
+           <tr v-for="item in findstus">
+               <td>{{item.id}}</td>
+               <td>{{item.name}}</td>
+               <td>{{item.age}}</td>
+           </tr>
+        </table>
+    </div>
+    <script>    
+    var vm= new Vue({
+        el:"#app",
+        data:{
+            stus:[{id:1,name:"陈舒琪",age:"20"},{id:2,name:"游帅云",age:"19"},{id:3,name:"李铁蛋",age:"21"}],
+            get:""
+        },
+        //计算属性computed
+       computed: {
+          findstus:function(){
+              var _this=this;
+              return this.stus.filter(function(val){
+                  return val.name.indexOf(_this.get)!=-1;
+
+              });
+          }
+       }
+
+    })
+    </script>
+</body>
+</html>
