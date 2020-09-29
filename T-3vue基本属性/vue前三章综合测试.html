@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+      <div class="container">
+        <div class="col-lg-4 col-lg-offset-4">
+            <div class="form-group">
+                <label>名称：</label>
+                <input type="text" placeholder="请输入名称" class="form-control" v-model="newlist.name">
+            </div>
+            <div class="form-group">
+                <label>价格：</label>
+                <input type="text" placeholder="请输入价格" class="form-control" v-model="newlist.price">
+            </div>
+            <div class="form-group">
+                <label>类别：</label>
+                <select class="form-control" v-model="newlist.type">
+                    <option v-for="(item,index) in type">{{item}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button class="form-control btn btn-default" v-on:click="add">添加</button> 
+            </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>根据商品名查询：</label>
+                <input type="text" class="form-control" placeholder="请输入商品名查找" v-model="selectname">
+            </div>
+        </div>
+      </div>
+      <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <th>名称</th>
+                <th>单价</th>
+                <th>类别</th>
+                <th>删除</th>
+            </tr>
+            <tr v-for="(item,index) in findsahngpinlist">
+                <td>{{item.name}}</td>
+                <td>￥{{item.price}}</td>
+                <td>{{item.type}}</td>
+                <td>
+                    <button class="btn btn-warning" @click="del(index)"> 删除</button>
+                </td>
+            </tr>
+        </table>
+      </div>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            //数据初始化
+            data:{
+                sahngpinlist:[{name:"米久pro",price:"3000",type:"餐具"}],
+                type:["手机/数码","书籍","餐具","零食"],
+                newlist:{name:"",price:"",type:"餐具"},
+                selectname:""
+            },
+            //绑定事件属性methods
+            methods: {
+                del:function(index){
+                    if(confirm("确定删除?")){
+                        this.sahngpinlist.splice(index,1);
+                    }
+                },
+                add:function(){
+                    this.sahngpinlist.push(this.newlist);  
+                }
+            },
+            //计算属性
+            computed: {
+                //给筛选完的返回值起个名字
+                findsahngpinlist:function(){
+                    var _this=this;
+                    //使用过滤器筛选符合条件的值
+                    return _this.sahngpinlist.filter(function(val){
+                        return val.name.indexOf(_this.selectname)!=-1;
+                    });
+
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

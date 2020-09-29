@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        .show{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="col-lg-5">
+        <div class="form-group">
+            <label>商品名：</label>
+            <input type="text"  class="form-control" placeholder="请输入商品名" v-model="name">
+            <label v-bind:class="{show:!watchname}">商品名不能为空！</label>
+        </div>
+        <div class="form-group">
+            <label>单价：</label>
+            <input type="text"  class="form-control" placeholder="请输入商品单价" v-model="monery">
+            <label v-bind:class="{show:!watchmonery}">单价不能为空！</label>
+        </div>
+        <div class="form-group">
+            <label>数量：</label>
+            <input type="text"  class="form-control" placeholder="请输入商品数量" v-model="counts">
+            <label v-bind:class="{show:!watchcounts}">数量不能为空！</label>
+        </div>
+        <div class="form-group">
+            <label>总价￥{{sum}}</label>
+        </div>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data: {
+               name:"",
+               monery:"",
+               counts:"",
+               sum:"",
+               watchname:true,
+               watchmonery:true,
+               watchcounts:true,
+            },
+            watch: {
+                //监听的字段
+                name:{
+                    //设置handler确认初始是否执行函数
+                    //可以有两个参数newVal oldVal
+                    handler:function(newVal){
+                        if (newVal!=""){
+                            this.watchname=true;
+                            this.sum=this.monery*this.counts;
+                        }else{
+                            this.watchname=false;
+                            this.sum="";
+                        }
+                    },
+                    immediate:true
+                 },
+                 monery:{
+                    handler:function(newVal){
+                        if (newVal!=""){
+                            this.watchmonery=true;
+                            this.sum=this.monery*this.counts;
+                        }else{
+                            this.watchmonery=false;
+                            this.sum="";
+                        }
+                    },
+                    immediate:true
+                 },
+                 counts:{
+                    handler:function(newVal){
+                        if (newVal!=""){
+                            this.watchcounts=true;
+                            this.sum=this.monery*this.counts;
+                        }else{
+                            this.watchcounts=false;
+                            this.sum="";
+                        }
+                    },
+                    immediate:true
+                 }
+                 
+            }
+        })
+    </script>
+</body>
+</html>
