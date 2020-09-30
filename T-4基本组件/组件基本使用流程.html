@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <on-come></on-come>     
+    </div>
+    <script> 
+    //创建组件
+    var oneCom=Vue.extend({
+        template:"<h1>hello world</h1>"
+    });
+    //注册主键
+    Vue.component("on-come",oneCom);
+    var vm=new Vue({
+        el:"#app"
+    })   
+    </script>
+</body>
+</html>

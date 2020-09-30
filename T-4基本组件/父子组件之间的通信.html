@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app"> 
+        <show-list v-bind:show-Box="stulist"></show-list>
+    </div>
+     <!--定义父组件模板-->
+    <template id="show" >
+        <div class="container">
+            <h3>父子组件之间的通信（props）</h3>
+            <!--父组件中使用子组件-->
+            <box-list v-bind:showlist="showBox"></box-list>
+        </div>
+    </template>
+    <!--定义子组件模板-->
+    <template id="showbox" >
+            <table class="table table-hover">
+                <tr>
+                    <td>编号</td>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                </tr>
+                <tr v-for="item in showlist">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.age}}</td>
+                </tr>
+            </table>
+    </template>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                stulist:[
+                {id:1,name:"小明",age:20},
+                {id:2,name:"小王",age:30},
+                {id:3,name:"小李",age:23},
+                ]},
+            //注册局部父组件
+            components:{
+                "show-list":{
+                    //props定义传递属性注意命名（如果使用驼峰命名用-隔开）
+                    props: ["showBox"],
+                    template:"#show",
+                     //注册局部子组件
+                    components:{
+                        "box-list":{
+                            //props定义传递属性注意命名（如果使用驼峰命名用-隔开）
+                            props: ["showlist"],
+                            //绑定子组件模板
+                            template:"#showbox",
+                        }
+                    
+                    }
+                }
+            
+            }
+        })
+    </script>
+</body>
+</html>
