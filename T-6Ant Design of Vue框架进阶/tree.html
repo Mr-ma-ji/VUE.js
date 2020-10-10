@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/antd.min.css">
+    <script src="js/vue.js"></script>
+    <script src="js/antd.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <a-tree checkable v-bind="attrs"></a-tree>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                attrs:{
+                    treeData:[
+                        {
+                            title:"国内新闻",
+                            key:"new1",
+                            children:[
+                                {
+                                    title:"社会新闻",
+                                    key:"new1-1",
+                                },
+                                {
+                                    title:"娱乐新闻",
+                                    key:"new1-2",
+                                }
+                            ]
+                        },
+                        {
+                            title:"国际新闻",
+                            key:"new2",
+                            children:[
+                                {
+                                    title:"非洲新闻",
+                                    key:"new2-1",
+                                },
+                                {
+                                    title:"亚洲新闻",
+                                    key:"new2-2",
+                                }
+                            ]
+                        }
+                    ],
+                    defaultCheckedKeys:["new2-1","new2-2"],
+                    defaultExpandedKeys:["new1","new2"]
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/antd.min.css">
+    <script src="js/vue.js"></script>
+    <script src="js/antd.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>省市联动</h3>
+        <a-select v-model="selectP" @change=" doChange">
+        <a-select-option v-for="p in pData" :key="p">
+        {{p}}
+        </a-select-option>
+        </a-select>
+        <!--市-->
+        <a-select v-model="selectC">
+        <a-select-option v-for="c in cData":key="c">
+            {{c}}
+        </a-select-option>
+        </a-select>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+               //默认的省份和城市
+                selectP:"河南",
+                selectC:"郑州",
+                //省份数组
+                pData:["河南","河北"],
+                //城市的数组
+                cData:["郑州", "开封", "洛阳", "平顶山","安阳"],
+                //省份城市的键值对
+                pc:{
+                "河南":["郑州", "开封","洛阳","平顶山","安阳"],
+                "河北":["石家庄","保定","唐山","邯郸","秦皇岛"]
+                }
+            },
+            methods: {
+                    doChange: function( value ){
+                    this.cData = this. pc[value];
+                    this.selectC = this.pc[value][0];
+                    this. selectP = value;
+                    }
+            }
+        })
+    </script>
+</body>
+</html>
+
+

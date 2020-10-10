@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/antd.min.css">
+    <script src="js/vue.js"></script>
+    <script src="js/antd.min.js"></script>
+    <style>
+       .show{
+           border: 1px solid black;
+           width: 120px;
+           height: 30px;
+           margin: 10px 0px;
+           text-align: right;
+           padding: 5px;
+       }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="show">
+            {{result}}
+        </div>
+       <a-button-group>
+           <a-button @click="inputNum('1')">1</a-button>
+           <a-button @click="inputNum('2')">2</a-button>
+           <a-button @click="inputNum('3')">3</a-button>
+       </a-button-group><br/>
+       <a-button-group>
+        <a-button @click="inputNum('4')">4</a-button>
+        <a-button @click="inputNum('5')">5</a-button>
+        <a-button @click="inputNum('6')">6</a-button>
+    </a-button-group><br/>
+    <a-button-group>
+        <a-button @click="inputNum('7')">7</a-button>
+        <a-button @click="inputNum('8')">8</a-button>
+        <a-button @click="inputNum('9')">9</a-button>
+    </a-button-group><br/>
+    <a-button-group>
+        <a-button @click="inputNum('0')">0</a-button>
+        <a-button @click="inputOp('+')">+</a-button>
+        <a-button @click="inputOp('-')">-</a-button>
+    </a-button-group><br/>
+    <a-button-group>
+        <a-button @click="inputOp('*')">*</a-button>
+        <a-button @click="inputOp('/')">/</a-button>
+    </a-button-group><br/>
+    <a-button type="primary" @click="inputCal">  =  </a-button><br/>
+    <a-button type="primary" @click="inputC">重置</a-button>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                result: '',
+                leftNum: 0,
+                op: null,
+                isLeft: true
+            },
+            methods: {
+                inputNum: function(rel) {
+                this.result+=rel;
+                },
+                inputOp: function(op) {
+                 if (this.isLeft){
+                        this.leftNum=parseInt(this.result);
+                        this.result="";
+                        this.isLeft=false;
+                        console.log(this.leftNum);
+                 }else{
+                    if (this.op == '+') {
+                        this.result=this.leftNum+parseInt(this.result);
+                        this.leftNum=parseInt(this.result);
+                    }
+                    if (this.op == '-') {
+                        this.result=this.leftNum-parseInt(this.result);
+                        this.leftNum=parseInt(this.result);
+                    }
+                    if (this.op == '*') {
+                        this.result=this.leftNum*parseInt(this.result);
+                        this.leftNum=parseInt(this.result);
+                    }
+                    if (this.op == '/') {
+                        this.result=this.leftNum/parseInt(this.result);
+                        this.leftNum=parseInt(this.result);
+                    }
+                 }
+                 this.result="";
+                 this.op=op;
+                },
+                inputC: function() {
+                    this.result = ''
+                    this.leftNum = ''
+                    this.rightNum = ''
+                    this.isLeft = true
+                },
+                inputCal: function() {
+                    if (this.op == '+') {
+                        this.result=this.leftNum+parseInt(this.result);
+                        this.leftNum=parseInt(this.result);
+                    }
+                    if (this.op == '-') {
+                        this.result=this.leftNum-parseInt(this.result);
+                        this.leftNum=parseInt(this.result);
+                    }
+                    if (this.op == '*') {
+                        this.result=this.leftNum*parseInt(this.result);
+                        this.leftNum=parseInt(this.result);
+                    }
+                    if (this.op == '/') {
+                        this.result=this.leftNum/parseInt(this.result);
+                        this.leftNum=parseInt(this.result);
+                    }
+                }
+        }
+        })
+    </script>
+</body>
+</html>

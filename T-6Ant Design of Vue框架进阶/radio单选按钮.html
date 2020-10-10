@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/antd.min.css">
+    <script src="js/vue.js"></script>
+    <script src="js/antd.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>中国最好吃的面条是?</h3>
+        <a-radio-group v-model= "result1" >
+        <a-radio-button value="a">河南烩面</a-radio-button>
+        <a-radio-button value="b">山西刀削面</a-radio-button>
+        <a-radio-button value="c">陕西臊了面</a-radio-button>
+        <a-radio-button value="d">"北京炸酱面</a-radio-button>
+        <h3>最好喝的茶是?</h3>
+        <a-radio-group v-model= "result2">
+        <a-radio value="a" >信阳毛尖</a-radio>
+        <a-radio value="b">西湖龙</a-radio>
+        <a-radio value="c">云南普洱</a-radio>
+        <a-radio value="d">铁观音</a-radio>
+        <h3>你认为最好的饮料是? </h3>
+        <a-radio-group v-model="result3" :options="items"></a-radio-group>
+        <br/>
+        <a-button type="primary" @click="doSubmit">提交</a-button>
+  </div>
+  <script>
+    var Vm = new Vue({
+    el:"#app" ,
+    data:{
+            //定义变量用于双向绑定单选按钮
+            result1:"",
+            result2:"",
+            result3:"",
+            //数组.
+            items:[
+            {label:"雪碧",value:"a"},
+            {label: "可口可乐" ,value:"b"},
+            {label:"百事可乐" ,value:"C"},
+            {label: "蜜雪冰城" ,value:"d"},
+            ]
+        },
+    methods:{
+        doSubmit : function(){
+                var score = 10;
+                if (this.result1 == "a") {
+                     score+=30;
+                }
+                if (this.result2 == "b") {
+                    score+=30;
+                }
+                if (this.result3=="d") {
+                    score+=30;
+                  
+                }
+                    //弹出最终得分
+                this.$message.info("您的最终得分是:"+score);
+        }
+     }
+    });
+    </script>
+    
+</body>
+</html>
