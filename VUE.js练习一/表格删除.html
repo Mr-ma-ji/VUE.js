@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/antd.min.css">
+    <script src="js/vue.js">  </script>
+    <script src="js/antd.min.js"></script>
+</head>
+<body>
+   <div id="app">
+       <label > 根据姓名模糊查询</label>
+       <input type="text" placeholder="请输入姓名：" v-model="msg">
+     <a-table v-bind="attrs" :columns="columns" bordered>
+         <span slot="id" slot-scope="text">
+             <a href="javascript:;" @click="doRemove(text)">删除</a>
+         </span>
+     </a-table>
+   </div>
+   <script> 
+   var vm=new Vue({
+       el:"#app",
+       data:{
+           worderkey:"",
+           columns:[
+               {
+                   title:"姓名",
+                   dataIndex:"name",
+                   key:"name",
+                   align:"center"
+
+               },
+               {
+                   title:"年龄",
+                   dataIndex:"age",
+                   key:"age",
+                   align:"center"
+
+               },
+               {
+                   title:"住址",
+                   dataIndex:"address",
+                   key:"address",
+                   align:"center"
+
+               },
+               {
+                   title:"操作",
+                   dataIndex:"id",
+                   key:"id",
+                   align:"center",
+                   scopedSlots:{
+                       customRender:"id"
+                   }
+
+               },
+               ],
+               attrs:{
+                   dataSource:[
+                       {id:1,name:"张三",age:32,address:"湖北"},
+                       {id:2,name:"李四",age:40,address:"湖南"},
+                       {id:3,name:"王五",age:50,address:"湖北"},
+                       {id:4,name:"赵六",age:41,address:"湖南"},
+                       {id:5,name:"刘七",age:45,address:"湖北"},
+                       ],
+                       rowkey:"id"
+               },
+               showtable:{
+                   dataSource:[]
+               }
+       },
+       methods: {
+         doRemove:function(id){
+                alert(id);
+                 this.attrs.dataSource.splice(id-1,1);
+                 this.$message.warn("删除成功！");
+         }
+       },
+       //计算属性
+       computed: {
+        showtable:function(){
+            var _this=this;
+            return _this.attrs.filter(function(val){
+                return val.dataSource.name.indexOf(_this.worderkey)!=-1;
+            });
+           }
+       }
+   })
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/antd.min.css">
+    <style>
+        .showtips{
+            display:none;
+        }
+        .hiddtip{
+            display:hidden;
+            color: red;                     
+        }
+    </style>
+</head>
+<body>
+   <div id="app"> 
+       <span>姓名：</span> 
+       <input type="text" v-model="name">
+       <label v-bind:class="{hiddtip:nameTip,showtips:!nameTip}" >姓名不能为空！</label><br/>
+       <span>年龄：</span>  
+       <input type="text" v-model="age">
+       <label v-bind:class="{hiddtip:ageTip,showtips:!ageTip}">年龄不能为空！</label><br/>
+       <span>性别：</span> 
+         <select v-model="sex">
+             <option v-for="item in sexlist" >{{item}}</option>
+         </select><br/>
+         <button @click="insert()">添加</button><br/>
+        关键字：<input type="text" v-model="key">
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>删除</th>
+        </tr>
+        <tr v-for="(item,index) in filtlist">
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.sex}}</td>
+            <td><a href="#" @click="del(index)">删除</a></td>
+        </tr>
+    </table>
+   </div>
+    <script>
+       var vm=new Vue({
+           el:"#app",
+           data:{
+               //表格数据
+            people: [{ name: '张三',age: 30,sex: '男'},
+                     { name: '李四',age: 26,sex: '男' }, 
+                     { name: '王五',age: 22,sex: '女'}, 
+                     { name: '赵六',age: 36,sex: '男'}
+                    ],
+            sexlist:["男","女"],
+            name:"",
+            age:"",
+            sex:"男",
+            nameTip:true,
+            ageTip:true,
+            sexTip:true,
+            key:""
+           },
+           //绑定事件
+           methods: {
+               //删除
+            del:function (id){
+                //删除一条数据
+                this.people.splice(id,1);
+            },
+            //添加
+            insert:function (){
+                var newstu={"name":this.name,age:this.age,sex:this.sex};
+                this.people.push(newstu);
+             }
+           },
+           watch:{
+                name:{
+                    handler:function(newVal,oldVal){
+                        if(newVal==""){
+                            this.nameTip=true;
+                        }else{
+                            this.nameTip=false;
+                        }
+                    },
+                    immediate:true
+                },
+                age:{
+                    handler:function(newVal,oldVal){
+                        if(newVal==""){
+                            this.ageTip=true;
+                        }else{
+                            this.ageTip=false;
+                        }
+                    },
+                    immediate:true
+                }
+            },
+            computed: {
+                filtlist:function(){
+                var _this=this;
+                return this.people.filter(function(val){
+                    return val.name.indexOf(_this.key)!=-1;
+                });
+                }
+            }
+            
+       }) 
+    </script>
+</body>
+</html>

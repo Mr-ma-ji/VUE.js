@@ -18,9 +18,9 @@
         </a-select>
         <!--市-->
         <a-select v-model="selectC">
-        <a-select-option v-for="c in cData":key="c">
-            {{c}}
-        </a-select-option>
+            <a-select-option v-for="c in cData" :key="c">
+                {{c}}
+            </a-select-option>
         </a-select>
     </div>
     <script>
